@@ -8,6 +8,7 @@ class Board extends Component {
         this.state={
             squares:Array(9).fill(null),
             xTurn:true,
+            showBorad:true
         }
     }
 
@@ -31,13 +32,14 @@ class Board extends Component {
     }
     render() {
         const winner=findWinner(this.state.squares);
+        const draw=isDraw(this.state.squares);
         let status;
         if(winner)
         {
             status="Winner: "+winner;
         }
         else
-        if(isDraw(this.state.squares))
+        if(draw)
         {
             status="Draw";
         }
@@ -48,23 +50,29 @@ class Board extends Component {
         return (
             <div>
                 <div className={Classes.Status}>{status}</div>
-                <div className="board-row">
-                    {this.renderSquare(0)}
-                    {this.renderSquare(1)}
-                    {this.renderSquare(2)}
-                </div>
+                {this.state.showBorad?
+                    <div>
+                        <div className="board-row">
+                            {this.renderSquare(0)}
+                            {this.renderSquare(1)}
+                            {this.renderSquare(2)}
+                        </div>
 
-                <div className="board-row">
-                    {this.renderSquare(3)}
-                    {this.renderSquare(4)}
-                    {this.renderSquare(5)}
-                </div> 
+                        <div className="board-row">
+                            {this.renderSquare(3)}
+                            {this.renderSquare(4)}
+                            {this.renderSquare(5)}
+                        </div> 
 
-                <div className="board-row">
-                    {this.renderSquare(6)}
-                    {this.renderSquare(7)}
-                    {this.renderSquare(8)}
-                </div>               
+                        <div className="board-row">
+                            {this.renderSquare(6)}
+                            {this.renderSquare(7)}
+                            {this.renderSquare(8)}
+                        </div>
+                    </div>
+                    :
+                    <br/>
+                }               
             </div>
         )
     }
