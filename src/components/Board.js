@@ -7,7 +7,8 @@ class Board extends Component {
 
         this.state={
             squares:Array(9).fill(null),
-            xTurn:true
+            xTurn:true,
+            reset:false
         }
     }
 
@@ -15,8 +16,12 @@ class Board extends Component {
     {
         const squares=this.state.squares.slice()
         
-        if(findWinner(this.state.squares) || squares[i])
+        if(findWinner(this.state.squares) || squares[i] || isDraw(this.state.squares))
         {
+            this.setState(
+                {
+                    reset:true
+                })
             return;
         }
         squares[i]=this.state.xTurn?'X':'O'
@@ -68,9 +73,17 @@ class Board extends Component {
                         {this.renderSquare(8)}
                     </div>
                 </div>
-                <div class={Classes.ResetBtn}>
-                    <button class="button">RESET</button>
-                </div>
+                {
+                    this.state.reset?
+                    <div class={Classes.ResetBtn}>
+                        <button onClick={()=>{return this.setState({squares:Array(9).fill(null),
+            xTurn:true,
+            reset:false})}}>RESET</button>
+                    </div>
+                    :
+                    <br/>
+                }
+                
             </div>
         )
     }
