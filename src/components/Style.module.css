@@ -76,11 +76,6 @@
 .Game{
     text-align:center;
 }
-
-.ResetBtn{
-    
-}
-
 .ResetBtn {
     height: 100%;
     display: flex;
@@ -164,3 +159,53 @@
       opacity: 0;
     }
   }
+
+
+  @media screen and (max-width: 600px) {
+    .Square {
+        width: 50px;
+        height: 50px;
+        margin: 0.5%;
+        border: none;
+        outline: none;
+        color: #fff;
+        background: #111;
+        cursor: pointer;
+        position: relative;
+        z-index: 0;
+        border-radius: 10px;
+        font-size: 25px;
+        font-family: 'Coda Caption', sans-serif;
+        font-family: 'Luckiest Guy', cursive;
+    }
+
+    .Status{
+    
+        color: #39ff14;
+        font-size: 50px;
+        font-family: 'Coda Caption', sans-serif;
+        font-family: 'Luckiest Guy', cursive;
+        margin-top: 35%;
+    }
+
+    .ResetBtn>button {
+        min-width: 150px;
+        min-height: 30px;
+        font-family: 'Nunito', sans-serif;
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 1.3px;
+        font-weight: 700;
+        color: #313133;
+        background: #39ff14;
+      background: linear-gradient(90deg, rgb(129, 230, 129) 0%, rgb(142, 209, 79) 100%);
+        border: none;
+        border-radius: 1000px;
+        box-shadow: 12px 12px 24px rgba(113, 235, 37, 0.64);
+        transition: all 0.3s ease-in-out 0s;
+        cursor: pointer;
+        outline: none;
+        position: relative;
+        padding: 10px;
+        }
+}

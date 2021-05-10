@@ -15,21 +15,26 @@ class Board extends Component {
     handleClick(i)
     {
         const squares=this.state.squares.slice()
+        if(squares[i] || findWinner(squares) || isDraw(squares))
+            {
+                console.log("No")
+                return;
+            }
         
-        if(findWinner(this.state.squares) || squares[i] || isDraw(this.state.squares))
-        {
-            this.setState(
-                {
-                    reset:true
-                })
-            return;
-        }
         squares[i]=this.state.xTurn?'X':'O'
         this.setState(
             {
                 squares:squares,
                 xTurn:!this.state.xTurn
             })
+        if(findWinner(squares) || isDraw(squares))
+        {
+            console.log("Yes")
+                this.setState(
+                {
+                    reset:true
+                })
+        }
     }
     renderSquare(i){
         return <Square value={this.state.squares[i]} onClick={()=>{return this.handleClick(i)}}/>
@@ -54,20 +59,20 @@ class Board extends Component {
         return (
             <div>
                 <div className={Classes.Status}>{status}</div>
-                <div>
-                    <div className="board-row">
+                <div className={Classes.Board}>
+                    <div className={Classes.BoardRow}>
                         {this.renderSquare(0)}
                         {this.renderSquare(1)}
                         {this.renderSquare(2)}
                     </div>
 
-                    <div className="board-row">
+                    <div className={Classes.BoardRow}>
                         {this.renderSquare(3)}
                         {this.renderSquare(4)}
                         {this.renderSquare(5)}
                     </div> 
 
-                    <div className="board-row">
+                    <div className={Classes.BoardRow}>
                         {this.renderSquare(6)}
                         {this.renderSquare(7)}
                         {this.renderSquare(8)}
@@ -75,10 +80,10 @@ class Board extends Component {
                 </div>
                 {
                     this.state.reset?
-                    <div class={Classes.ResetBtn}>
+                    <div className={Classes.ResetBtn}>
                         <button onClick={()=>{return this.setState({squares:Array(9).fill(null),
-            xTurn:true,
-            reset:false})}}>RESET</button>
+                                                                            xTurn:true,
+                                                                            reset:false})}}>RESET</button>
                     </div>
                     :
                     <br/>
